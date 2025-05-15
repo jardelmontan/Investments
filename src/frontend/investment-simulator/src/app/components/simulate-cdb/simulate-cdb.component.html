@@ -1,0 +1,66 @@
+<div class="container">
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+  <div class="title">
+    <h1>Simular investimento em CDB</h1>
+  </div>
+  <form #formRef="ngForm" (ngSubmit)="simulate()">
+    <div class="form-row">
+      <label for="initialAmount">Valor Inicial *</label>
+      <input
+        required
+        matInput
+        type="text"
+        mask="separator.2"
+        thousandSeparator="."
+        decimalMarker=","
+        [(ngModel)]="initialAmount"
+        name="initialAmount"
+        min="1"
+      />
+    </div>
+    <div class="form-row">
+      <label for="totalMonths">Meses *</label>
+      <input
+        placeholder="Mínimo 2"
+        type="number"
+        step="1"
+        [(ngModel)]="totalMonths"
+        name="totalMonths"
+        required
+        min="2"
+      />
+    </div>
+    <button
+      type="submit"
+      [disabled]="!formRef.valid || !isAmountValid(initialAmount)"
+    >
+      Simular
+    </button>
+  </form>
+  <div class="result-simulate">
+    <div>
+      <span>Valor bruto</span
+      ><span>{{ formatToBrl(resultSimulateCdb?.grossValue) }}</span>
+    </div>
+    <div class="color-green">
+      <span>Valor líquido</span
+      ><span>{{ formatToBrl(resultSimulateCdb?.netValue) }}</span>
+    </div>
+    <div>
+      <span>Rendimento</span
+      ><span>{{ formatToBrl(resultSimulateCdb?.investmentReturn) }}</span>
+    </div>
+    <div>
+      <span>% do imposto de renda</span>
+      <span>{{
+        resultSimulateCdb?.taxRate | percent : "1.2-2" : "pt-BR"
+      }}</span>
+    </div>
+    <div class="color-red">
+      <span>Valor pago em imposto de renda</span>
+      <span>{{ formatToBrl(resultSimulateCdb?.taxDiscountAmount) }}</span>
+    </div>
+  </div>
+</div>
