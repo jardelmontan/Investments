@@ -18,11 +18,11 @@ Both projects are structured to work together seamlessly, and can be run either 
 - [Docker](https://www.docker.com/get-started) installed
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
-### Steps to Run with
+### Steps to Run
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/investments-app.git
+git clone https://github.com/jardelmontan/Investments.git
 cd investments
 
 # Run the application
